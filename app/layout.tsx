@@ -1,0 +1,43 @@
+import { Analytics } from '@vercel/analytics/next'
+import type { Metadata, Viewport } from 'next'
+import { Inter, Plus_Jakarta_Sans } from 'next/font/google'
+import './globals.css'
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+})
+
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  variable: '--font-jakarta',
+  display: 'swap',
+})
+
+export const metadata: Metadata = {
+  title: 'SafeRoute — Travel Smarter. Travel Safer.',
+  description:
+    'Check safety scores for areas, hotels, and travel routes before you go, powered by community reviews and public safety data.',
+  generator: 'v0.app',
+}
+
+export const viewport: Viewport = {
+  colorScheme: 'light',
+  themeColor: '#ffffff',
+}
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode
+}>) {
+  return (
+    <html lang="en" className={`bg-background ${inter.variable} ${jakarta.variable}`}>
+      <body className="font-sans antialiased">
+        {children}
+        {process.env.NODE_ENV === 'production' && <Analytics />}
+      </body>
+    </html>
+  )
+}
